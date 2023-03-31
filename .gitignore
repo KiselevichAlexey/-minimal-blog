@@ -1,0 +1,11 @@
+*.DS_Store
+.bash_history
+/shared
+.idea
+/vendor
+.env
+docker/data/*/*
+docker/logs/*/*
+makemysqldump.sh
+makeuploadarchive.sh
+*/.htaccess

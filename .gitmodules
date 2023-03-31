@@ -1,0 +1,3 @@
+[submodule "bitrix"]
+	path = bitrix
+	url = https://github.com/KiselevichAlexey/minimal-blog-bitrix.git
