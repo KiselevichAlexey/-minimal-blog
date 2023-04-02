@@ -44,14 +44,14 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
     <div class="top-bar">
         <div class="container">
             <div class="row">
-                <div class="col-9 social">
-                    <a href="#"><span class="fa fa-twitter"></span></a>
-                    <a href="#"><span class="fa fa-facebook"></span></a>
-                    <a href="#"><span class="fa fa-instagram"></span></a>
-                    <a href="#"><span class="fa fa-youtube-play"></span></a>
-                    <a href="#"><span class="fa fa-vimeo"></span></a>
-                    <a href="#"><span class="fa fa-snapchat"></span></a>
-                </div>
+                <?php $APPLICATION->IncludeComponent(
+                    "project:social",
+                    "header",
+                    [
+                        "CACHE_TIME" => "3600",
+                        "CACHE_TYPE" => "A",
+                    ]
+                ); ?>
                 <div class="col-3 search-top">
                     <!-- <a href="#"><span class="fa fa-search"></span></a> -->
                     <form action="#" class="search-top-form">
