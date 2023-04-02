@@ -72,38 +72,26 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
             </div>
         </div>
     </div>
-
-    <nav class="navbar navbar-expand-md  navbar-light bg-light">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="navbarMenu">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Categories</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown05">
-                            <a class="dropdown-item" href="category.html">Lifestyle</a>
-                            <a class="dropdown-item" href="category.html">Food</a>
-                            <a class="dropdown-item" href="category.html">Adventure</a>
-                            <a class="dropdown-item" href="category.html">Travel</a>
-                            <a class="dropdown-item" href="category.html">Business</a>
-                        </div>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div
-    </nav>
+    <?php
+    $APPLICATION->IncludeComponent(
+        "bitrix:menu",
+        "header_top",
+        [
+            "ALLOW_MULTI_SELECT" => "N",
+            "CHILD_MENU_TYPE" => "left",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "2",
+            "MENU_CACHE_GET_VARS" => [
+            ],
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "A",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "ROOT_MENU_TYPE" => "top",
+            "USE_EXT" => "Y",
+            "COMPONENT_TEMPLATE" => "header_top",
+        ],
+        false
+    ); ?>
 </header>
 
 <section class="site-section pt-5">
@@ -113,7 +101,8 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
 
                 <div class="owl-carousel owl-theme home-slider">
                     <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" style="background-image: url('<?=MARKUP_PATH?>images/img_1.jpg'); ">
+                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
+                           style="background-image: url('<?= MARKUP_PATH ?>images/img_1.jpg'); ">
                             <div class="text half-to-full">
                                 <div class="post-meta">
                                     <span class="category">Lifestyle</span>
@@ -121,12 +110,14 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
                                     <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
                                 </div>
                                 <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
+                                    eaque ipsa laudantium!</p>
                             </div>
                         </a>
                     </div>
                     <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" style="background-image: url('<?=MARKUP_PATH?>images/img_2.jpg'); ">
+                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
+                           style="background-image: url('<?= MARKUP_PATH ?>images/img_2.jpg'); ">
                             <div class="text half-to-full">
                                 <div class="post-meta">
                                     <span class="category">Lifestyle</span>
@@ -134,12 +125,14 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
                                     <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
                                 </div>
                                 <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
+                                    eaque ipsa laudantium!</p>
                             </div>
                         </a>
                     </div>
                     <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" style="background-image: url('<?=MARKUP_PATH?>images/img_3.jpg'); ">
+                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
+                           style="background-image: url('<?= MARKUP_PATH ?>images/img_3.jpg'); ">
                             <div class="text half-to-full">
                                 <div class="post-meta">
                                     <span class="category">Lifestyle</span>
@@ -147,12 +140,14 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
                                     <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
                                 </div>
                                 <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
+                                    eaque ipsa laudantium!</p>
                             </div>
                         </a>
                     </div>
                     <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg" style="background-image: url('<?=MARKUP_PATH?>images/img_3.jpg'); ">
+                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
+                           style="background-image: url('<?= MARKUP_PATH ?>images/img_3.jpg'); ">
                             <div class="text half-to-full">
                                 <div class="post-meta">
                                     <span class="category">Lifestyle</span>
@@ -160,7 +155,8 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
                                     <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
                                 </div>
                                 <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta eaque ipsa laudantium!</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
+                                    eaque ipsa laudantium!</p>
                             </div>
                         </a>
                     </div>
