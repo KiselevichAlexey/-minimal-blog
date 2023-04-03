@@ -72,6 +72,9 @@ class StandardElementListComponent extends CBitrixComponent
         if (isset($params['IBLOCK_CODE'])) {
             $result['IBLOCK_CODE'] = trim($params['IBLOCK_CODE']);
         }
+        if (isset($params['SECTION_CODE'])) {
+            $result['SECTION_CODE'] = trim($params['SECTION_CODE']);
+        }
         if (isset($params['SHOW_NAV'])) {
             $result['SHOW_NAV'] = $params['SHOW_NAV'] === 'Y' ? 'Y' : 'N';
         }
@@ -244,16 +247,73 @@ class StandardElementListComponent extends CBitrixComponent
      */
     protected function getResult()
     {
-        $filter = [
+        $iterator = $this->getIterator();
+        while ($element = $iterator->GetNext()) {
+            $this->arResult['ITEMS'][] = $this->getItems($element);
+        }
+        if ($this->arParams['SHOW_NAV'] == 'Y' && $this->arParams['COUNT'] > 0) {
+            $this->arResult['NAV_STRING'] = $iterator->GetPageNavString('');
+        }
+    }
+
+    /**
+     * @return CIBlockResult|int
+     */
+    protected function getIterator(): int|CIBlockResult {
+        return CIBlockElement::GetList(
+            $this->getOrder(),
+            $this->getFilter(),
+            false,
+            $this->navParams,
+            $this->getSelect()
+        );
+    }
+
+    /**
+     * @param array $element
+     * @return array
+     */
+    protected function getItems(array $element): array
+    {
+        return [
+            'ID' => $element['ID'],
+            'NAME' => $element['NAME'],
+            'DATE' => $element['ACTIVE_FROM'],
+            'URL' => $element['DETAIL_PAGE_URL'],
+            'TEXT' => $element['PREVIEW_TEXT'],
+            'PICTURE' => $element['PREVIEW_PICTURE'],
+        ];
+    }
+
+    /**
+     * сортировка по умолчанию
+     * @return array
+     */
+    protected function getOrder(): array {
+       return [
+            $this->arParams['SORT_FIELD1'] => $this->arParams['SORT_DIRECTION1'],
+            $this->arParams['SORT_FIELD2'] => $this->arParams['SORT_DIRECTION2'],
+        ];
+    }
+
+    /**
+     * Фильтрация по умолчанию
+     * @return array
+     */
+    protected function getFilter(): array {
+        return [
             'IBLOCK_TYPE' => $this->arParams['IBLOCK_TYPE'],
             'IBLOCK_ID' => $this->arParams['IBLOCK_ID'],
             'ACTIVE' => 'Y',
         ];
-        $sort = [
-            $this->arParams['SORT_FIELD1'] => $this->arParams['SORT_DIRECTION1'],
-            $this->arParams['SORT_FIELD2'] => $this->arParams['SORT_DIRECTION2'],
-        ];
-        $select = [
+    }
+
+    /**
+     * выборка по умолчанию
+     * @return array
+     */
+    protected function getSelect(): array {
+        return [
             'ID',
             'NAME',
             'DATE_ACTIVE_FROM',
@@ -261,19 +321,6 @@ class StandardElementListComponent extends CBitrixComponent
             'PREVIEW_TEXT',
             'PREVIEW_TEXT_TYPE',
         ];
-        $iterator = CIBlockElement::GetList($sort, $filter, false, $this->navParams, $select);
-        while ($element = $iterator->GetNext()) {
-            $this->arResult['ITEMS'][] = [
-                'ID' => $element['ID'],
-                'NAME' => $element['NAME'],
-                'DATE' => $element['DATE_ACTIVE_FROM'],
-                'URL' => $element['DETAIL_PAGE_URL'],
-                'TEXT' => $element['PREVIEW_TEXT'],
-            ];
-        }
-        if ($this->arParams['SHOW_NAV'] == 'Y' && $this->arParams['COUNT'] > 0) {
-            $this->arResult['NAV_STRING'] = $iterator->GetPageNavString('');
-        }
     }
 
     /**
