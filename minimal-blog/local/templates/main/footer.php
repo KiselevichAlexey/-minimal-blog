@@ -1,6 +1,6 @@
 <?php
 /**
- * @global $APPLICATION;
+ * @global $APPLICATION ;
  */
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -18,7 +18,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     <!-- END sidebar-box -->
     <div class="sidebar-box">
         <div class="bio text-center">
-            <img src="<?=MARKUP_PATH?>images/person_1.jpg" alt="Image Placeholder" class="img-fluid">
+            <img src="<?= MARKUP_PATH ?>images/person_1.jpg" alt="Image Placeholder" class="img-fluid">
             <div class="bio-body">
                 <h2>Meagan Smith</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt
@@ -27,11 +27,13 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
                 <p><a href="/about" class="btn btn-primary btn-sm">Read my bio</a></p>
                 <?php $APPLICATION->IncludeComponent(
                     "project:social",
-                    "personal.card",
+                    "sidebar",
                     [
                         "CACHE_TIME" => "3600",
                         "CACHE_TYPE" => "A",
-                    ]
+                        "COMPONENT_TEMPLATE" => "sidebar",
+                    ],
+                    false
                 ); ?>
             </div>
         </div>
@@ -80,26 +82,27 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
             </ul>
         </div>
     </div>
+
+    <!-- END sidebar-box -->
+
     <?php
     $APPLICATION->IncludeComponent(
         "project:blog.section.list",
         "sidebar.list",
         [
             "COMPONENT_TEMPLATE" => "sidebar.list",
+            "IBLOCK_TYPE" => "blog",
+            "IBLOCK_CODE" => "Posts",
+            "COUNT" => "5",
+            "SORT_FIELD1" => "SHOW_COUNTER",
+            "SORT_DIRECTION1" => "DESC",
+            "SORT_FIELD2" => "SORT",
+            "SORT_DIRECTION2" => "DESC",
+            "CACHE_TYPE" => "A",
+            "CACHE_TIME" => "3600",
         ],
         false
     ); ?>
-    <!-- END sidebar-box -->
-    <div class="sidebar-box">
-        <h3 class="heading">Categories</h3>
-        <ul class="categories">
-            <li><a href="#">Courses <span>(12)</span></a></li>
-            <li><a href="#">News <span>(22)</span></a></li>
-            <li><a href="#">Design <span>(37)</span></a></li>
-            <li><a href="#">HTML <span>(42)</span></a></li>
-            <li><a href="#">Web Development <span>(14)</span></a></li>
-        </ul>
-    </div>
     <!-- END sidebar-box -->
 
 </div>
@@ -112,7 +115,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Copyright &copy;<?= date('Y') ?>
                 All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                    href="https://colorlib.com" target="_blank">Colorlib</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </div>
         </div>
