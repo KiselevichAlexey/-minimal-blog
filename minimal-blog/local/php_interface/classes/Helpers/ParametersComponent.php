@@ -3,10 +3,7 @@
 namespace App\Helpers;
 
 use CIBlock;
-use CIBlockProperty;
-use CIBlockPropertyEnum;
 use CIBlockSection;
-use CIBlockSectionPropertyLink;
 
 class ParametersComponent
 {
@@ -23,7 +20,7 @@ class ParametersComponent
                 'IDS' => [],
                 'CODES' => [
                     '' => ' ',
-                ]
+                ],
             ];
         }
 
@@ -38,9 +35,10 @@ class ParametersComponent
                         'IDS' => [],
                         'CODES' => [
                             '' => ' ',
-                        ]
+                        ],
                     ];
                 }
+
                 $result[$iblock['IBLOCK_TYPE_ID']]['IDS'][$iblock['CODE']] = $iblock['ID'];
                 $result[$iblock['IBLOCK_TYPE_ID']]['CODES'][$iblock['CODE']] = $iblock['NAME'];
             }
@@ -49,11 +47,16 @@ class ParametersComponent
         return $result;
     }
 
+    /**
+     * @return string[]
+     */
     public static function getSections(?string $iblockType, ?string $iblockCode): array
     {
-        $sections = ['' => ' - '];
+        $sections = ['' => ''];
 
-        if (empty($iblockCode)) { return $sections;  }
+        if (empty($iblockCode)) {
+            return $sections;
+        }
 
         $arFilterSection = [
             'SECTION_ID' => false, // только корневые разделы
@@ -63,6 +66,7 @@ class ParametersComponent
         if (!empty($iblockType)) {
             $arFilterSection['IBLOCK_TYPE'] = $iblockType;
         }
+
         // если уже выбран инфоблок, выбираем разделы только этого инфоблока
         $arFilterSection['IBLOCK_CODE'] = $iblockCode;
 
@@ -74,6 +78,9 @@ class ParametersComponent
         return $sections;
     }
 
+    /**
+     * @return string[]
+     */
     public static function getRootSectionsByIblockId(?int $iblockId): array
     {
         $result = [
@@ -105,6 +112,9 @@ class ParametersComponent
         ];
     }
 
+    /**
+     * @return array{ASC: string, DESC: string}
+     */
     public static function getSortDirection(): array
     {
         return [
@@ -113,7 +123,10 @@ class ParametersComponent
         ];
     }
 
-    public static function insertSortInParameters(&$componentParameter, $countSort = 2, $sortFields = [])
+    /**
+     * @param $componentParameter
+     */
+    public static function insertSortInParameters(&$componentParameter, int $countSort = 2, array $sortFields = []): void
     {
         $sortFields = $sortFields ?: self::getSortFields();
         $sortParameters = [
@@ -154,7 +167,10 @@ class ParametersComponent
         $componentParameter['PARAMETERS'] = array_merge($componentParameter['PARAMETERS'], $sortParameters);
     }
 
-    public static function insertAjaxSettingsInParameters(&$componentParameter)
+    /**
+     * @param $componentParameter
+     */
+    public static function insertAjaxSettingsInParameters(&$componentParameter): void
     {
         $componentParameter['GROUPS']['AJAX_SETTINGS'] = [
             'NAME' => 'Управление режимом AJAX',
@@ -174,7 +190,10 @@ class ParametersComponent
         ];
     }
 
-    public static function insertShowNavInParameters(&$componentParameter)
+    /**
+     * @param $componentParameter
+     */
+    public static function insertShowNavInParameters(&$componentParameter): void
     {
         $componentParameter['PARAMETERS']['SHOW_NAV'] = [
             'PARENT' => 'VISUAL',
@@ -184,7 +203,10 @@ class ParametersComponent
         ];
     }
 
-    public static function insertCountInParameters(&$componentParameter)
+    /**
+     * @param $componentParameter
+     */
+    public static function insertCountInParameters(&$componentParameter): void
     {
         $componentParameter['PARAMETERS']['COUNT'] = [
             'PARENT' => 'VISUAL',
@@ -194,13 +216,18 @@ class ParametersComponent
         ];
     }
 
+    /**
+     * @param $componentParameter
+     * @param $values
+     */
     public static function insertIblockTypeInParameters(
         &$componentParameter,
         $values,
-        $keyParameter = 'IBLOCK_TYPE',
-        $needRefresh = true,
-        $name = ''
-    ) {
+        string $keyParameter = 'IBLOCK_TYPE',
+        bool $needRefresh = true,
+        string $name = ''
+    ): void
+    {
         $componentParameter['PARAMETERS'][$keyParameter] = [
             'PARENT' => 'DATA_SOURCE',
             'NAME' => $name ?: 'Тип инфоблока',
@@ -211,13 +238,19 @@ class ParametersComponent
             'ADDITIONAL_VALUES' => 'Y',
         ];
     }
+
+    /**
+     * @param $componentParameter
+     * @param $values
+     */
     public static function insertIblockCodeInParameters(
         &$componentParameter,
         $values,
-        $keyParameter = 'IBLOCK_CODE',
-        $needRefresh = true,
-        $name = ''
-    ) {
+        string $keyParameter = 'IBLOCK_CODE',
+        bool $needRefresh = true,
+        string $name = ''
+    ): void
+    {
         $componentParameter['PARAMETERS'][$keyParameter] = [
             'PARENT' => 'DATA_SOURCE',
             'NAME' => $name ?: 'Код Инфоблока',
@@ -226,5 +259,28 @@ class ParametersComponent
             'REFRESH' => $needRefresh ? 'Y' : 'N',
             'ADDITIONAL_VALUES' => 'Y',
         ];
+    }
+
+    /**
+     * @param $componentParameter
+     * @param $values
+     */
+    public static function insertIblocSectionInParameters(
+        &$componentParameter,
+        $values,
+        string $keyParameter = 'SECTION_CODE',
+        bool $needRefresh = true,
+        string $name = ''
+    ): void
+    {
+        $componentParameter['PARAMETERS'][$keyParameter] = [
+            'PARENT' => 'DATA_SOURCE',
+            'NAME' => $name ?: 'Код раздела',
+            'TYPE' => 'LIST',
+            'VALUES' => $values,
+            'REFRESH' => $needRefresh ? 'Y' : 'N',
+            'ADDITIONAL_VALUES' => 'Y',
+        ];
+
     }
 }
