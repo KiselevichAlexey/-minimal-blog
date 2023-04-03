@@ -1,22 +1,30 @@
 <?php
+
 namespace App\Helpers;
+
+use Carbon\Carbon;
+
 class Misc
 {
+    /**
+     * @param array $menus
+     * @return array
+     */
     public static function convertMenuToTree(array $menus): array
     {
         $newMenus = ['ITEMS' => []];
         $curItems = &$newMenus['ITEMS'];
         $curDepthLevel = 1;
         $stack = [];
-        foreach($menus as $item) {
-            if ($item['DEPTH_LEVEL'] - $curDepthLevel >= 2  ){
+        foreach ($menus as $item) {
+            if ($item['DEPTH_LEVEL'] - $curDepthLevel >= 2) {
                 continue;
             }
 
             if ($curDepthLevel < $item['DEPTH_LEVEL']) {
                 $stack[$curDepthLevel][] = &$curItems;
                 $curDepthLevel = $item['DEPTH_LEVEL'];
-                $curItems = &$curItems[count($curItems) - 1]['ITEMS'];
+                $curItems = &$curItems[(is_countable($curItems) ? count($curItems) : 0) - 1]['ITEMS'];
             }
 
             if ($curDepthLevel > $item['DEPTH_LEVEL']) {
@@ -34,5 +42,17 @@ class Misc
         unset($stack);
 
         return $newMenus;
+    }
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    public static function changeDateFromFormat(string $date): string
+    {
+        Carbon::setLocale('en');
+        $formatDate = Carbon::createFromTimestamp(strtotime($date));
+
+        return $formatDate->translatedFormat('F j, Y');
     }
 }
