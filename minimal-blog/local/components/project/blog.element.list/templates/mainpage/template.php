@@ -14,7 +14,7 @@ use Bitrix\Main\Localization\Loc as Loc;
 
 Loc::loadMessages(__FILE__);
 ?>
-
+<?php if ($arResult['ITEMS']): ?>
 <div class="col-md-12 col-lg-8 main-content">
     <div class="row">
         <?php foreach ($arResult['ITEMS'] as $element): ?>
@@ -25,7 +25,7 @@ Loc::loadMessages(__FILE__);
                         <div class="post-meta">
                             <span class="category"><?= $element['SECTION'] ?></span>
                             <span class="mr-2"><?= $element['DATE'] ?></span> &bullet;
-                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                            <span class="ml-2"><span class="fa fa-eye"></span> <?= $element['VIEWS'] ?></span>
                         </div>
                         <h2><?= $element['NAME'] ?></h2>
                     </div>
@@ -33,7 +33,6 @@ Loc::loadMessages(__FILE__);
             </div>
         <?php endforeach; ?>
     </div>
-
     <div class="row">
         <div class="col-md-12 text-center">
             <nav aria-label="Page navigation" class="text-center">
@@ -49,3 +48,4 @@ Loc::loadMessages(__FILE__);
     </div>
 
 </div>
+<?php endif;?>

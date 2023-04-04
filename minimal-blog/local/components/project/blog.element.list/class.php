@@ -17,11 +17,11 @@ class BlogElementListComponent extends StandardElementListComponent
      */
     protected function getResult(): void
     {
-        $this->arParams['SECTION_L'] = $this->getSectionName();
+        $this->arParams['SECTION_LIST'] = $this->getSectionName();
         if ($this->arParams['SECTION_CODE']) {
             $this->arResult['SECTION_ID'] = IBlockHelper::getSectionIdByCode($this->arParams['SECTION_CODE'],
                 $this->arParams['IBLOCK_ID']);
-            $this->arResult['SECTION_NAME'] = $this->arParams['SECTION_L'][$this->arResult['SECTION_ID']];
+            $this->arResult['SECTION_NAME'] = $this->arParams['SECTION_LIST'][$this->arResult['SECTION_ID']];
 
         }
         parent::getResult();
@@ -62,13 +62,13 @@ class BlogElementListComponent extends StandardElementListComponent
             'DATE' => Misc::changeDateFromFormat($element['ACTIVE_FROM']),
             'URL' => $element['DETAIL_PAGE_URL'],
             'PICTURE' => CFile::GetPath($element['PREVIEW_PICTURE']),
-            'SECTION' => $this->arParams['SECTION_L'][$element['IBLOCK_SECTION_ID']],
+            'SECTION' => $this->arParams['SECTION_LIST'][$element['IBLOCK_SECTION_ID']],
+            'VIEWS' => $element['SHOW_COUNTER'] ?: 0,
         ];
     }
 
-    /**
-     * @throws \WheatleyWL\BXIBlockHelpers\Exceptions\IBlockHelperException
-     */
+
+
     protected function getFilter(): array
     {
         $parent = parent::getFilter();
@@ -89,6 +89,7 @@ class BlogElementListComponent extends StandardElementListComponent
             'DETAIL_PAGE_URL',
             'PREVIEW_PICTURE',
             'IBLOCK_SECTION_ID',
+            'SHOW_COUNTER',
         ];
     }
 }
