@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\Misc;
+use WheatleyWL\BXIBlockHelpers\Exceptions\IBlockHelperException;
 use WheatleyWL\BXIBlockHelpers\IBlockHelper;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
@@ -13,7 +14,7 @@ class BlogElementListComponent extends StandardElementListComponent
 {
 
     /**
-     * @throws \WheatleyWL\BXIBlockHelpers\Exceptions\IBlockHelperException
+     * @throws IBlockHelperException
      */
     protected function getResult(): void
     {
@@ -22,9 +23,13 @@ class BlogElementListComponent extends StandardElementListComponent
             $this->arResult['SECTION_ID'] = IBlockHelper::getSectionIdByCode($this->arParams['SECTION_CODE'],
                 $this->arParams['IBLOCK_ID']);
             $this->arResult['SECTION_NAME'] = $this->arParams['SECTION_LIST'][$this->arResult['SECTION_ID']];
-
         }
         parent::getResult();
+        $this->setResultCacheKeys([
+                'SECTION_NAME',
+                'SECTION_ID',
+            ]
+        );
     }
 
     /**
@@ -68,7 +73,6 @@ class BlogElementListComponent extends StandardElementListComponent
     }
 
 
-
     protected function getFilter(): array
     {
         $parent = parent::getFilter();
@@ -90,6 +94,15 @@ class BlogElementListComponent extends StandardElementListComponent
             'PREVIEW_PICTURE',
             'IBLOCK_SECTION_ID',
             'SHOW_COUNTER',
+        ];
+    }
+
+    protected function executeEpilog(): void
+    {
+        parent::executeEpilog();
+        $this->returned = [
+            'TITLE' => $this->arResult['SECTION_NAME'],
+            "SECTION_ID" => $this->arResult['SECTION_ID'],
         ];
     }
 }

@@ -69,7 +69,7 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
             <div class="col-12 text-center">
                 <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button"
                    aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                <h1 class="site-logo"><a href="index.html">Balita</a></h1>
+                <h1 class="site-logo"><a href="/">Balita</a></h1>
             </div>
         </div>
     </div>
@@ -94,32 +94,40 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
         false
     ); ?>
 </header>
-
+<?php if ($APPLICATION->GetCurPage() === '/'): ?>
 <?php
 $APPLICATION->IncludeComponent(
-	"project:main.slider", 
-	"mainpage", 
-	array(
-		"COMPONENT_TEMPLATE" => "mainpage",
-		"IBLOCK_TYPE" => "blog",
-		"IBLOCK_CODE" => "Posts",
-		"COUNT" => "8",
-		"SORT_FIELD1" => "SORT",
-		"SORT_DIRECTION1" => "ASC",
-		"SORT_FIELD2" => "SHOW_COUNTER",
-		"SORT_DIRECTION2" => "ASC",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600"
-	),
-	false
+    "project:main.slider",
+    "mainpage",
+    [
+        "COMPONENT_TEMPLATE" => "mainpage",
+        "IBLOCK_TYPE" => "blog",
+        "IBLOCK_CODE" => "Posts",
+        "COUNT" => "8",
+        "SORT_FIELD1" => "SORT",
+        "SORT_DIRECTION1" => "ASC",
+        "SORT_FIELD2" => "SHOW_COUNTER",
+        "SORT_DIRECTION2" => "ASC",
+        "CACHE_TYPE" => "A",
+        "CACHE_TIME" => "3600",
+    ],
+    false
 ); ?>
-
 <section class="site-section py-sm">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="mb-4">Lifestyle Category</h2>
+                <h2 class="mb-4"><?php $APPLICATION->ShowTitle(false) ?></h2>
             </div>
         </div>
-        <div class="row blog-entries">
+<?php else: ?>
+<section class="site-section">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h1><?php $APPLICATION->ShowTitle(false) ?></h1>
+            </div>
+        </div>
+<?php endif; ?>
+    <div class="row blog-entries">
 						
