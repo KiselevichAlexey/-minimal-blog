@@ -37,8 +37,9 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $APPLICATION->ShowHead(); ?>
 </head>
-<body>
 <?php $APPLICATION->ShowPanel(); ?>
+
+<body>
 
 <header role="banner">
     <div class="top-bar">
@@ -94,78 +95,24 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
     ); ?>
 </header>
 
-<section class="site-section pt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="owl-carousel owl-theme home-slider">
-                    <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
-                           style="background-image: url('<?= MARKUP_PATH ?>images/img_1.jpg'); ">
-                            <div class="text half-to-full">
-                                <div class="post-meta">
-                                    <span class="category">Lifestyle</span>
-                                    <span class="mr-2">March 15, 2018 </span> &bullet;
-                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                </div>
-                                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
-                                    eaque ipsa laudantium!</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
-                           style="background-image: url('<?= MARKUP_PATH ?>images/img_2.jpg'); ">
-                            <div class="text half-to-full">
-                                <div class="post-meta">
-                                    <span class="category">Lifestyle</span>
-                                    <span class="mr-2">March 15, 2018 </span> &bullet;
-                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                </div>
-                                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
-                                    eaque ipsa laudantium!</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
-                           style="background-image: url('<?= MARKUP_PATH ?>images/img_3.jpg'); ">
-                            <div class="text half-to-full">
-                                <div class="post-meta">
-                                    <span class="category">Lifestyle</span>
-                                    <span class="mr-2">March 15, 2018 </span> &bullet;
-                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                </div>
-                                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
-                                    eaque ipsa laudantium!</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="blog-single.html" class="a-block d-flex align-items-center height-lg"
-                           style="background-image: url('<?= MARKUP_PATH ?>images/img_3.jpg'); ">
-                            <div class="text half-to-full">
-                                <div class="post-meta">
-                                    <span class="category">Lifestyle</span>
-                                    <span class="mr-2">March 15, 2018 </span> &bullet;
-                                    <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                </div>
-                                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut dicta
-                                    eaque ipsa laudantium!</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
+<?php
+$APPLICATION->IncludeComponent(
+	"project:main.slider", 
+	"mainpage", 
+	array(
+		"COMPONENT_TEMPLATE" => "mainpage",
+		"IBLOCK_TYPE" => "blog",
+		"IBLOCK_CODE" => "Posts",
+		"COUNT" => "8",
+		"SORT_FIELD1" => "SORT",
+		"SORT_DIRECTION1" => "ASC",
+		"SORT_FIELD2" => "SHOW_COUNTER",
+		"SORT_DIRECTION2" => "ASC",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600"
+	),
+	false
+); ?>
 
 <section class="site-section py-sm">
     <div class="container">
