@@ -15,7 +15,6 @@ use Bitrix\Main\Localization\Loc as Loc;
 Loc::loadMessages(__FILE__);
 ?>
 <?php if ($arResult['ITEMS']): ?>
-    <div class="row">
         <div class="sidebar-box">
             <h3 class="heading"><?= Loc::getMessage('CATEGORIES') ?></h3>
             <ul class="categories">
@@ -25,5 +24,4 @@ Loc::loadMessages(__FILE__);
                 <?php endforeach; ?>
             </ul>
         </div>
-    </div>
 <?php endif; ?>

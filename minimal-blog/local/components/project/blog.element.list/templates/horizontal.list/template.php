@@ -15,7 +15,6 @@ use Bitrix\Main\Localization\Loc as Loc;
 Loc::loadMessages(__FILE__);
 ?>
 <?php if ($arResult['ITEMS']): ?>
-    <div class="col-md-12 col-lg-8 main-content">
         <div class="row mb-5 mt-5">
             <div class="col-md-12">
                 <?php foreach ($arResult['ITEMS'] as $element): ?>
@@ -37,5 +36,4 @@ Loc::loadMessages(__FILE__);
             </div>
         </div>
         <?=$arResult["NAV_STRING"]?>
-    </div>
 <?php endif; ?>
