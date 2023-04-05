@@ -36,7 +36,7 @@ try {
     ParametersComponent::insertShowNavInParameters($arComponentParameters);
     ParametersComponent::insertCountInParameters($arComponentParameters);
     ParametersComponent::insertSortInParameters($arComponentParameters);
-
+    CIBlockParameters::AddPagerSettings($arComponentParameters,'Навигация');
 } catch (Main\LoaderException $e) {
     ShowError($e->getMessage());
 }

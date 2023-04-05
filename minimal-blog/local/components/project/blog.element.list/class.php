@@ -30,7 +30,6 @@ class BlogElementListComponent extends StandardElementListComponent
                 'SECTION_ID',
             ]
         );
-        pre($this->getNavParams());
     }
 
     /**
@@ -105,13 +104,5 @@ class BlogElementListComponent extends StandardElementListComponent
             'TITLE' => $this->arResult['SECTION_NAME'],
             "SECTION_ID" => $this->arResult['SECTION_ID'],
         ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getNavParams(): array
-    {
-        return $this->navParams;
     }
 }

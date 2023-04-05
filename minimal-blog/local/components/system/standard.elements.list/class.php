@@ -11,35 +11,30 @@ class StandardElementListComponent extends CBitrixComponent
 {
     /**
      * кешируемые ключи arResult
-     *
      * @var array()
      */
     protected $cacheKeys = [];
 
     /**
      * дополнительные параметры, от которых должен зависеть кеш
-     *
      * @var array
      */
     protected $cacheAddon = [];
 
     /**
      * парамтеры постраничной навигации
-     *
      * @var array
      */
     protected $navParams = [];
 
     /**
      * вохвращаемые значения
-     *
      * @var mixed
      */
     protected $returned;
 
     /**
      * тегированный кеш
-     *
      * @var mixed
      */
     protected $tagCache;
@@ -57,9 +52,7 @@ class StandardElementListComponent extends CBitrixComponent
 
     /**
      * подготавливает входные параметры
-     *
      * @param array $params
-     *
      * @return array
      */
     public function onPrepareComponentParams($params): array
@@ -105,13 +98,25 @@ class StandardElementListComponent extends CBitrixComponent
         if (isset($params['MODAL_ID'])) {
             $result['MODAL_ID'] = $params['MODAL_ID'];
         }
+        if (isset($params['PAGER_TEMPLATE'])) {
+            $result['PAGER_TEMPLATE'] = $params['PAGER_TEMPLATE'];
+        }
+        if (isset($params['PAGER_TITLE'])) {
+            $result['PAGER_TITLE'] = $params['PAGER_TITLE'];
+        }
+        if (isset($params['PAGER_SHOW_ALWAYS'])) {
+            $result['PAGER_SHOW_ALWAYS'] = $params['PAGER_SHOW_ALWAYS'];
+        }
+        if (isset($params['PAGER_DESC_NUMBERING_CACHE_TIME'])) {
+            $result['PAGER_DESC_NUMBERING_CACHE_TIME'] = $params['PAGER_DESC_NUMBERING_CACHE_TIME'];
+        }
+
 
         return $result;
     }
 
     /**
      * определяет читать данные из кеша или нет
-     *
      * @return bool
      */
     protected function readDataFromCache(): bool
@@ -150,7 +155,6 @@ class StandardElementListComponent extends CBitrixComponent
 
     /**
      * завершает кеширование
-     *
      * @return bool
      */
     protected function endCache(): bool
@@ -165,19 +169,17 @@ class StandardElementListComponent extends CBitrixComponent
 
     /**
      * проверяет подключение необходиимых модулей
-     *
      * @throws Main\LoaderException
      */
     protected function checkModules()
     {
-        if (! Main\Loader::includeModule('iblock')) {
+        if (!Main\Loader::includeModule('iblock')) {
             throw new Main\LoaderException(Loc::getMessage('STANDARD_ELEMENTS_LIST_CLASS_IBLOCK_MODULE_NOT_INSTALLED'));
         }
     }
 
     /**
      * проверяет заполнение обязательных параметров
-     *
      * @throws \Bitrix\Main\ArgumentNullException
      */
     protected function checkParams()
@@ -215,7 +217,6 @@ class StandardElementListComponent extends CBitrixComponent
 
     /**
      * Определяет ID инфоблока по коду, если не был задан
-     *
      * @throws \Bitrix\Main\ArgumentNullException
      */
     protected function getIblockId()
@@ -252,14 +253,16 @@ class StandardElementListComponent extends CBitrixComponent
             $this->arResult['ITEMS'][] = $this->getItems($element);
         }
         if ($this->arParams['SHOW_NAV'] == 'Y' && $this->arParams['COUNT'] > 0) {
-            $this->arResult['NAV_STRING'] = $iterator->GetPageNavString('');
+            $this->arResult['NAV_STRING'] = $iterator->GetPageNavString($this->arParams['PAGER_TITLE'],
+                $this->arParams['PAGER_TEMPLATE'], $this->arParams['PAGER_SHOW_ALWAYS']);
         }
     }
 
     /**
      * @return CIBlockResult|int
      */
-    protected function getIterator(): int|CIBlockResult {
+    protected function getIterator(): int|CIBlockResult
+    {
         return CIBlockElement::GetList(
             $this->getOrder(),
             $this->getFilter(),
@@ -289,8 +292,9 @@ class StandardElementListComponent extends CBitrixComponent
      * сортировка по умолчанию
      * @return array
      */
-    protected function getOrder(): array {
-       return [
+    protected function getOrder(): array
+    {
+        return [
             $this->arParams['SORT_FIELD1'] => $this->arParams['SORT_DIRECTION1'],
             $this->arParams['SORT_FIELD2'] => $this->arParams['SORT_DIRECTION2'],
         ];
@@ -300,7 +304,8 @@ class StandardElementListComponent extends CBitrixComponent
      * Фильтрация по умолчанию
      * @return array
      */
-    protected function getFilter(): array {
+    protected function getFilter(): array
+    {
         return [
             'IBLOCK_TYPE' => $this->arParams['IBLOCK_TYPE'],
             'IBLOCK_ID' => $this->arParams['IBLOCK_ID'],
@@ -312,7 +317,8 @@ class StandardElementListComponent extends CBitrixComponent
      * выборка по умолчанию
      * @return array
      */
-    protected function getSelect(): array {
+    protected function getSelect(): array
+    {
         return [
             'ID',
             'NAME',

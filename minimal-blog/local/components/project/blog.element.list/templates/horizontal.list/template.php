@@ -17,9 +17,7 @@ Loc::loadMessages(__FILE__);
 <?php if ($arResult['ITEMS']): ?>
     <div class="col-md-12 col-lg-8 main-content">
         <div class="row mb-5 mt-5">
-
             <div class="col-md-12">
-
                 <?php foreach ($arResult['ITEMS'] as $element): ?>
                     <div class="post-entry-horzontal">
                         <a href="<?= $element['URL'] ?>">
@@ -38,19 +36,6 @@ Loc::loadMessages(__FILE__);
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <nav aria-label="Page navigation" class="text-center">
-                    <ul class="pagination">
-                        <li class="page-item  active"><a class="page-link" href="#">Prev</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        <?=$arResult["NAV_STRING"]?>
     </div>
-
 <?php endif; ?>

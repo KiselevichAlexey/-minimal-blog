@@ -25,6 +25,13 @@ Loc::loadMessages(__FILE__);
         "SORT_DIRECTION2" => "ASC",
         "SORT_FIELD1" => "ACTIVE_FROM",
         "SORT_FIELD2" => "SORT",
+        "PAGER_TEMPLATE" => "project.main",
+        "DISPLAY_TOP_PAGER" => "N",
+        "DISPLAY_BOTTOM_PAGER" => "N",
+        "PAGER_TITLE" => "Навигация",
+        "PAGER_SHOW_ALWAYS" => "Y",
+        "PAGER_DESC_NUMBERING" => "N",
+        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
     ], $component
 ); ?>
 
