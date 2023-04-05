@@ -17,7 +17,7 @@ $APPLICATION->SetTitle("My Blog");
 		"SORT_DIRECTION1" => "DESC",
 		"SORT_FIELD2" => "SORT",
 		"SORT_DIRECTION2" => "ASC",
-		"COUNT" => "10",
+		"COUNT" => "6",
 		"SHOW_NAV" => "Y",
 		"SEF_MODE" => "Y",
 		"SEF_FOLDER" => "/categories/",

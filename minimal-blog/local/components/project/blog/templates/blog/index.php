@@ -1,6 +1,8 @@
 <?php use Bitrix\Main\Localization\Loc;
 
-if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
+    die();
+}
 /**
  * @global $APPLICATION
  * @var array $arParams
@@ -8,29 +10,23 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
  * @var \BlogComponent $component
  */
 Loc::loadMessages(__FILE__);
-?>
-
-<?php $res = $APPLICATION->IncludeComponent(
+?><?php $APPLICATION->IncludeComponent(
     "project:blog.element.list",
-    "mainpage",
+    "horizontal.list",
     [
-        "CACHE_TIME" => "3600",
-        "CACHE_TYPE" => "A",
-        "COMPONENT_TEMPLATE" => "mainpage",
-        "COUNT" => "5",
-        "IBLOCK_CODE" => "Posts",
-        "IBLOCK_TYPE" => "blog",
-        "SHOW_NAV" => "Y",
-        "SORT_DIRECTION1" => "ASC",
-        "SORT_DIRECTION2" => "ASC",
-        "SORT_FIELD1" => "ACTIVE_FROM",
-        "SORT_FIELD2" => "SORT",
+        "CACHE_TIME" => $arParams['CACHE_TIME'],
+        "CACHE_TYPE" => $arParams['CACHE_TYPE'],
+        "COMPONENT_TEMPLATE" => "horizontal.list",
+        "COUNT" => $arParams['COUNT'],
+        "IBLOCK_CODE" => $arParams['IBLOCK_CODE'],
+        "IBLOCK_TYPE" => $arParams['IBLOCK_TYPE'],
+        "SHOW_NAV" => $arParams['SHOW_NAV'],
+        "SORT_DIRECTION1" => $arParams['SORT_DIRECTION1'],
+        "SORT_DIRECTION2" => $arParams['SORT_DIRECTION2'],
+        "SORT_FIELD1" => $arParams['SORT_FIELD1'],
+        "SORT_FIELD2" => $arParams['SORT_FIELD2'],
         "PAGER_TEMPLATE" => "project.main",
-        "DISPLAY_TOP_PAGER" => "N",
-        "DISPLAY_BOTTOM_PAGER" => "N",
         "PAGER_TITLE" => "Навигация",
-        "PAGER_SHOW_ALWAYS" => "Y",
-        "PAGER_DESC_NUMBERING" => "N",
         "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
     ], $component
 ); ?>

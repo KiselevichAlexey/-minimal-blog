@@ -13,21 +13,22 @@ CBitrixComponent::includeComponentClass('system:standard.elements.list');
 class BlogElementListComponent extends StandardElementListComponent
 {
 
+    protected array $sectionList = [];
     /**
      * @throws IBlockHelperException
      */
     protected function getResult(): void
     {
-        $this->arParams['SECTION_LIST'] = $this->getSectionName();
+        $this->sectionList = $this->getSectionName();
         if ($this->arParams['SECTION_CODE']) {
-            $this->arResult['SECTION_ID'] = IBlockHelper::getSectionIdByCode($this->arParams['SECTION_CODE'],
+            $sectionId = IBlockHelper::getSectionIdByCode($this->arParams['SECTION_CODE'],
                 $this->arParams['IBLOCK_ID']);
-            $this->arResult['SECTION_NAME'] = $this->arParams['SECTION_LIST'][$this->arResult['SECTION_ID']];
+            $this->arResult['SECTION_NAME'] = $this->sectionList[$sectionId];
         }
+
         parent::getResult();
         $this->setResultCacheKeys([
                 'SECTION_NAME',
-                'SECTION_ID',
             ]
         );
     }
@@ -48,11 +49,17 @@ class BlogElementListComponent extends StandardElementListComponent
         if (!empty($this->arParams['IBLOCK_CODE'])) {
             $arFilterSection['IBLOCK_CODE'] = $this->arParams['IBLOCK_CODE'];
         }
-        $sections = [];
-        $sectionList = CIBlockSection::GetList([], $arFilterSection, true, ['NAME', 'ID']);
-        while ($section = $sectionList->GetNext()) {
-            $sections[$section['ID']] = $section['NAME'];
+        if (!empty($this->arParams['SECTION_CODE'])) {
+            $arFilterSection['CODE'] = $this->arParams['SECTION_CODE'];
         }
+
+        $sections = [];
+
+        $rsSections = CIBlockSection::GetList([], $arFilterSection, true, ['NAME', 'ID']);
+        while ($arSection = $rsSections->GetNext()) {
+            $sections[$arSection['ID']] = $arSection['NAME'];
+        }
+
         return $sections;
     }
 
@@ -67,7 +74,7 @@ class BlogElementListComponent extends StandardElementListComponent
             'DATE' => Misc::changeDateFromFormat($element['ACTIVE_FROM']),
             'URL' => $element['DETAIL_PAGE_URL'],
             'PICTURE' => CFile::GetPath($element['PREVIEW_PICTURE']),
-            'SECTION' => $this->arParams['SECTION_LIST'][$element['IBLOCK_SECTION_ID']],
+            'SECTION' => $this->sectionList[$element['IBLOCK_SECTION_ID']],
             'VIEWS' => $element['SHOW_COUNTER'] ?: 0,
         ];
     }
@@ -76,8 +83,8 @@ class BlogElementListComponent extends StandardElementListComponent
     protected function getFilter(): array
     {
         $parent = parent::getFilter();
-        if ($this->arResult['SECTION_ID']) {
-            $parent['SECTION_ID'] = $this->arResult['SECTION_ID'];
+        if ($this->arParams['SECTION_CODE']) {
+            $parent['SECTION_CODE'] = $this->arParams['SECTION_CODE'];
         }
         return $parent;
     }
@@ -102,7 +109,6 @@ class BlogElementListComponent extends StandardElementListComponent
         parent::executeEpilog();
         $this->returned = [
             'TITLE' => $this->arResult['SECTION_NAME'],
-            "SECTION_ID" => $this->arResult['SECTION_ID'],
         ];
     }
 }
