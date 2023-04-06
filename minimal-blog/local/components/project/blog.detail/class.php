@@ -8,6 +8,8 @@ CBitrixComponent::includeComponentClass('project:blog.element.list');
 
 class BlogDetailComponent extends BlogElementListComponent
 {
+
+
     public function onPrepareComponentParams($arParam): array
     {
         $result = parent::onPrepareComponentParams($arParam);
@@ -23,7 +25,7 @@ class BlogDetailComponent extends BlogElementListComponent
 
     protected function getSelect(): array
     {
-        return [...parent::getSelect(), ...['ID','DETAIL_TEXT', 'PROPERTY_RELATED_POST']];
+        return [...parent::getSelect(), ...['ID', 'DETAIL_TEXT', 'PROPERTY_RELATED_POST', 'PROPERTY_IMAGES']];
     }
 
 
@@ -32,11 +34,13 @@ class BlogDetailComponent extends BlogElementListComponent
         $item = [
             'RELATED_POST' => $element['PROPERTY_RELATED_POST_VALUE'],
             'ID' => $element['ID'],
-            'TEXT' => $element['DETAIL_TEXT'],
+            'TEXT' =>  $element['DETAIL_TEXT'],
+            'IMAGES_BLOCKS' => $element['PROPERTY_IMAGES_VALUE'],
         ];
 
         return [...parent::getItems($element), ...$item];
     }
+
 
     /**
      * @return void
