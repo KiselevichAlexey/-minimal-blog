@@ -18,12 +18,9 @@ cd docker
 ```
 ./dctl.sh db import FILE
 ```
-
-и установим composer-зависимости
-
-```
-./dctl.sh run composer install
-```
+~~~
+и установим composer-зависимости /minimal-blog/local/php_interface/composer install
+~~~
 Скачается и применится последний после этого проект можно увидеть по адресу http://localhost
 
 По-умолчанию окружение ожидает подключений по 80 порту. Этот порт не должны использовать иные приложения.
