@@ -82,6 +82,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
         </div>
     </div>
 </section>
+<?php $APPLICATION->ShowViewContent('blog_detail');?>
 <footer class="site-footer">
     <div class="container">
         <div class="row">

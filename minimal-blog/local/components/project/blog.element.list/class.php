@@ -14,6 +14,7 @@ class BlogElementListComponent extends StandardElementListComponent
 {
 
     protected array $sectionList = [];
+    protected  $sectionId ;
     /**
      * @throws IBlockHelperException
      */
@@ -21,12 +22,19 @@ class BlogElementListComponent extends StandardElementListComponent
     {
         $this->sectionList = $this->getSectionName();
         if ($this->arParams['SECTION_CODE']) {
-            $sectionId = IBlockHelper::getSectionIdByCode($this->arParams['SECTION_CODE'],
+            $this->sectionId = IBlockHelper::getSectionIdByCode($this->arParams['SECTION_CODE'],
                 $this->arParams['IBLOCK_ID']);
-            $this->arResult['SECTION_NAME'] = $this->sectionList[$sectionId];
+            $this->arResult['SECTION_NAME'] = $this->sectionList[$this->sectionId];
+        }
+        $iterator = $this->getIterator();
+        while ($element = $iterator->GetNext()) {
+            $this->arResult['ITEMS'][] = $this->getItems($element);
         }
 
-        parent::getResult();
+        if ($this->arParams['SHOW_NAV'] == 'Y' && $this->arParams['COUNT'] > 0) {
+            $this->arResult['NAV_STRING'] = $iterator->GetPageNavString($this->arParams['PAGER_TITLE'],
+                $this->arParams['PAGER_TEMPLATE'], $this->arParams['PAGER_SHOW_ALWAYS']);
+        }
         $this->setResultCacheKeys([
                 'SECTION_NAME',
             ]
@@ -74,7 +82,7 @@ class BlogElementListComponent extends StandardElementListComponent
             'DATE' => Misc::changeDateFromFormat($element['ACTIVE_FROM']),
             'URL' => $element['DETAIL_PAGE_URL'],
             'PICTURE' => CFile::GetPath($element['PREVIEW_PICTURE']),
-            'SECTION' => $this->sectionList[$element['IBLOCK_SECTION_ID']],
+            'SECTION' => $this->sectionList[$element['IBLOCK_SECTION_ID']] ?: $this->sectionList[$this->sectionId],
             'VIEWS' => $element['SHOW_COUNTER'] ?: 0,
         ];
     }

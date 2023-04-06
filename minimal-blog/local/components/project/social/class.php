@@ -36,13 +36,12 @@ class SocialNetworkComponent extends StandardElementListComponent
     ];
 
     /**
-     * @param $params
+     * @param $arParams
      * @return array
      */
-    public function onPrepareComponentParams($params): array {
-        $result = parent::onPrepareComponentParams($params);
+    public function onPrepareComponentParams($arParams): array {
+        $result = parent::onPrepareComponentParams($arParams);
         $result ['HL_NAME'] = HL_SOCIAL_NETWORK;
-
         return $result;
     }
 
