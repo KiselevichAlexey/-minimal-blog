@@ -29,6 +29,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
         "SORT_FIELD1" => $arParams["SORT_FIELD2"],
         "SORT_FIELD2" => $arParams["SORT_FIELD1"],
         "PAGER_TEMPLATE" => "project.main",
-    ], $component
+    ], $component,
+    ['HIDE_ICONS' => 'Y']
 ); ?>
 <?php $APPLICATION->SetTitle(Loc::getMessage('CATEGORY') . $res['TITLE']); ?>

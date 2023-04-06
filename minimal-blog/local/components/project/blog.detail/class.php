@@ -23,7 +23,7 @@ class BlogDetailComponent extends BlogElementListComponent
 
     protected function getSelect(): array
     {
-        return [...parent::getSelect(), ...['ID', 'PROPERTY_RELATED_POST']];
+        return [...parent::getSelect(), ...['ID','DETAIL_TEXT', 'PROPERTY_RELATED_POST']];
     }
 
 
@@ -32,6 +32,7 @@ class BlogDetailComponent extends BlogElementListComponent
         $item = [
             'RELATED_POST' => $element['PROPERTY_RELATED_POST_VALUE'],
             'ID' => $element['ID'],
+            'TEXT' => $element['DETAIL_TEXT'],
         ];
 
         return [...parent::getItems($element), ...$item];

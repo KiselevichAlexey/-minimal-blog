@@ -21,7 +21,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
         'SECTION_CODE' => $arResult['VARIABLES']['SECTION_CODE'],
         'ELEMENT_CODE' => $arResult['VARIABLES']['ELEMENT_CODE'],
     ],
-    $component
+    $component,
+    ['HIDE_ICONS' => 'Y']
 ); ?>
 <?php $this->SetViewTarget('blog_detail');?>
 <?php $APPLICATION->IncludeComponent(
@@ -37,7 +38,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
         'RELATED_POST' => $detail['RELATED_POST'],
         'COUNT' => 3,
     ],
-    $component
+    $component,
+    ['HIDE_ICONS' => 'Y']
 );?>
 <?php $this->EndViewTarget();?>
 <?php $APPLICATION->SetTitle($detail['NAME']);?>

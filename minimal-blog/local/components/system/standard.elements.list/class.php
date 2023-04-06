@@ -52,63 +52,63 @@ class StandardElementListComponent extends CBitrixComponent
 
     /**
      * подготавливает входные параметры
-     * @param array $params
+     * @param array $arParams
      * @return array
      */
-    public function onPrepareComponentParams($params): array
+    public function onPrepareComponentParams($arParams): array
     {
         $result = [];
 
-        if (isset($params['IBLOCK_TYPE'])) {
-            $result['IBLOCK_TYPE'] = trim($params['IBLOCK_TYPE']);
+        if (isset($arParams['IBLOCK_TYPE'])) {
+            $result['IBLOCK_TYPE'] = trim($arParams['IBLOCK_TYPE']);
         }
-        if (isset($params['IBLOCK_CODE'])) {
-            $result['IBLOCK_CODE'] = trim($params['IBLOCK_CODE']);
+        if (isset($arParams['IBLOCK_CODE'])) {
+            $result['IBLOCK_CODE'] = trim($arParams['IBLOCK_CODE']);
         }
-        if (isset($params['SECTION_CODE'])) {
-            $result['SECTION_CODE'] = trim($params['SECTION_CODE']);
+        if (isset($arParams['SECTION_CODE'])) {
+            $result['SECTION_CODE'] = trim($arParams['SECTION_CODE']);
         }
-        if (isset($params['SHOW_NAV'])) {
-            $result['SHOW_NAV'] = $params['SHOW_NAV'] === 'Y' ? 'Y' : 'N';
+        if (isset($arParams['SHOW_NAV'])) {
+            $result['SHOW_NAV'] = $arParams['SHOW_NAV'] === 'Y' ? 'Y' : 'N';
         }
-        if (isset($params['COUNT'])) {
-            $result['COUNT'] = max(intval($params['COUNT']), 0);
+        if (isset($arParams['COUNT'])) {
+            $result['COUNT'] = max(intval($arParams['COUNT']), 0);
         }
-        if (isset($params['SORT_FIELD1'])) {
-            $result['SORT_FIELD1'] = trim($params['SORT_FIELD1']) ?: 'ID';
+        if (isset($arParams['SORT_FIELD1'])) {
+            $result['SORT_FIELD1'] = trim($arParams['SORT_FIELD1']) ?: 'ID';
         }
-        if (isset($params['SORT_DIRECTION1'])) {
-            $result['SORT_DIRECTION1'] = $params['SORT_DIRECTION1'] === 'ASC' ? 'ASC' : 'DESC';
+        if (isset($arParams['SORT_DIRECTION1'])) {
+            $result['SORT_DIRECTION1'] = $arParams['SORT_DIRECTION1'] === 'ASC' ? 'ASC' : 'DESC';
         }
-        if (isset($params['SORT_FIELD2'])) {
-            $result['SORT_FIELD2'] = trim($params['SORT_FIELD2']) ?: 'ID';
+        if (isset($arParams['SORT_FIELD2'])) {
+            $result['SORT_FIELD2'] = trim($arParams['SORT_FIELD2']) ?: 'ID';
         }
-        if (isset($params['SORT_DIRECTION2'])) {
-            $result['SORT_DIRECTION2'] = $params['SORT_DIRECTION2'] === 'ASC' ? 'ASC' : 'DESC';
+        if (isset($arParams['SORT_DIRECTION2'])) {
+            $result['SORT_DIRECTION2'] = $arParams['SORT_DIRECTION2'] === 'ASC' ? 'ASC' : 'DESC';
         }
-        if (isset($params['CACHE_TIME'])) {
-            $result['CACHE_TYPE'] = in_array($params['CACHE_TYPE'], ['Y', 'A', 'N']) ? $params['CACHE_TYPE'] : 'N';
-            $result['CACHE_TIME'] = intval($params['CACHE_TIME']) > 0 ? intval($params['CACHE_TIME']) : 3600;
-            $result['CACHE_TAG_OFF'] = $params['CACHE_TAG_OFF'] === 'Y';
+        if (isset($arParams['CACHE_TIME'])) {
+            $result['CACHE_TYPE'] = in_array($arParams['CACHE_TYPE'], ['Y', 'A', 'N']) ? $arParams['CACHE_TYPE'] : 'N';
+            $result['CACHE_TIME'] = intval($arParams['CACHE_TIME']) > 0 ? intval($arParams['CACHE_TIME']) : 3600;
+            $result['CACHE_TAG_OFF'] = $arParams['CACHE_TAG_OFF'] === 'Y';
         }
-        if (isset($params['AJAX'])) {
-            $params['AJAX_KEY'] = trim($params['AJAX_KEY']) ?: 'AJAX';
-            $result['AJAX'] = $params['AJAX'] === 'Y' && $this->request->get($params['AJAX_KEY']) === 'Y' ? 'Y' : 'N';
+        if (isset($arParams['AJAX'])) {
+            $arParams['AJAX_KEY'] = trim($arParams['AJAX_KEY']) ?: 'AJAX';
+            $result['AJAX'] = $arParams['AJAX'] === 'Y' && $this->request->get($arParams['AJAX_KEY']) === 'Y' ? 'Y' : 'N';
         }
-        if (isset($params['MODAL_ID'])) {
-            $result['MODAL_ID'] = $params['MODAL_ID'];
+        if (isset($arParams['MODAL_ID'])) {
+            $result['MODAL_ID'] = $arParams['MODAL_ID'];
         }
-        if (isset($params['PAGER_TEMPLATE'])) {
-            $result['PAGER_TEMPLATE'] = $params['PAGER_TEMPLATE'];
+        if (isset($arParams['PAGER_TEMPLATE'])) {
+            $result['PAGER_TEMPLATE'] = $arParams['PAGER_TEMPLATE'];
         }
-        if (isset($params['PAGER_TITLE'])) {
-            $result['PAGER_TITLE'] = $params['PAGER_TITLE'];
+        if (isset($arParams['PAGER_TITLE'])) {
+            $result['PAGER_TITLE'] = $arParams['PAGER_TITLE'];
         }
-        if (isset($params['PAGER_SHOW_ALWAYS'])) {
-            $result['PAGER_SHOW_ALWAYS'] = $params['PAGER_SHOW_ALWAYS'];
+        if (isset($arParams['PAGER_SHOW_ALWAYS'])) {
+            $result['PAGER_SHOW_ALWAYS'] = $arParams['PAGER_SHOW_ALWAYS'];
         }
-        if (isset($params['PAGER_DESC_NUMBERING_CACHE_TIME'])) {
-            $result['PAGER_DESC_NUMBERING_CACHE_TIME'] = $params['PAGER_DESC_NUMBERING_CACHE_TIME'];
+        if (isset($arParams['PAGER_DESC_NUMBERING_CACHE_TIME'])) {
+            $result['PAGER_DESC_NUMBERING_CACHE_TIME'] = $arParams['PAGER_DESC_NUMBERING_CACHE_TIME'];
         }
 
 

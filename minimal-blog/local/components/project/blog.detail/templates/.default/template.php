@@ -14,7 +14,6 @@
 $this->setFrameMode(true);
 
 use Bitrix\Main\Localization\Loc;
-
 ?>
 <div class="post-meta">
     <span class="category"><?= $arResult['SECTION'] ?></span>

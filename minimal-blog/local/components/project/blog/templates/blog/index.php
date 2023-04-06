@@ -28,6 +28,7 @@ Loc::loadMessages(__FILE__);
         "PAGER_TEMPLATE" => "project.main",
         "PAGER_TITLE" => "Навигация",
         "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-    ], $component
+    ], $component,
+    ['HIDE_ICONS' => 'Y']
 ); ?>
 

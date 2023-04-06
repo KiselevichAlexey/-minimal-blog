@@ -69,7 +69,19 @@ $asset->addJs(MARKUP_PATH . "js/main.js");
             <div class="col-12 text-center">
                 <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button"
                    aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                <h1 class="site-logo"><a href="/">Balita</a></h1>
+                <h1 class="site-logo"><a href="/">
+                        <?php $APPLICATION->IncludeComponent(
+                            "bitrix:main.include",
+                            ".default",
+                            [
+                                "AREA_FILE_SHOW" => "file",
+                                "AREA_FILE_SUFFIX" => "inc",
+                                "EDIT_TEMPLATE" => "",
+                                "COMPONENT_TEMPLATE" => ".default",
+                                "PATH" => "/local/include_areas/template/title.php",
+                            ],
+                            false,
+                        ); ?></a></h1>
             </div>
         </div>
     </div>
@@ -120,15 +132,15 @@ $APPLICATION->IncludeComponent(
                 <h2 class="mb-4"><?php $APPLICATION->ShowTitle(false) ?></h2>
             </div>
         </div>
-<?php else: ?>
-<section class="site-section">
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <h1><?php $APPLICATION->ShowTitle(false) ?></h1>
-            </div>
-        </div>
-<?php endif; ?>
-    <div class="row blog-entries">
-        <div class="col-md-12 col-lg-8 main-content">
+        <?php else: ?>
+        <section class="site-section">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h1><?php $APPLICATION->ShowTitle(false) ?></h1>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <div class="row blog-entries">
+                    <div class="col-md-12 col-lg-8 main-content">
 						
