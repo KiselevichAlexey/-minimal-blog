@@ -30,14 +30,15 @@ cd docker
 =================
 http://localhost/bitrix
 
-Детальная страница заполнена только одна
-http://localhost/categories/lifestyle/kak-sozdat-uyutnyy-dom-sovety-i-rekomendatsii/
+
 ```
 Логин: admin
 Пароль: adminadmin
 ```
-
-
+Детальная страница заполнена только одна
+```
+http://localhost/categories/lifestyle/kak-sozdat-uyutnyy-dom-sovety-i-rekomendatsii/
+```
 
 MailTrap
 =============
