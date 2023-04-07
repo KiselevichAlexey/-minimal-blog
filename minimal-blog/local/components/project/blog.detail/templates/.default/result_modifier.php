@@ -5,30 +5,29 @@
 /** @var array $arParams */
 /** @var array $arResult */
 
-$arResult['TEXT'] = prepaForTemplate($arResult['IMAGES_BLOCKS'], $arResult['TEXT']);
-function prepaForTemplate($mageId, $text)
+$arResult['TEXT'] = preForTemplate(array_chunk($arResult['IMAGES_BLOCKS'], 3), $arResult['TEXT']);
+function preForTemplate(array $imagesBlock, string $text): string
 {
+    foreach ($imagesBlock as $key => $element) {
 
-    $block = 0;
-    $count = 0;
-    $arImageBlocks = [];
+        $elementHTML = array_reduce(
+            array_map('getlistElement', array_keys($element), $element),
+            fn($carry, $item) => $carry .= $item,
+            ''
+        );
 
-    foreach ($mageId as  $image) {
-        $path = CFile::GetPath($image);
-        $md = $count == 0 ? 12 : 6;
-        $arImageBlocks[$block] .= '<div class="col-md-' . $md . ' mb-4 element-animate">
-                                        <img src="' . $path . '" alt="Image placeholder" class="img-fluid">
-                                    </div>';
-        $count++;
-        if ($count == 3) {
-            $block++;
-            $count = 0;
-        }
+        $html = '<div class="row mb-5">' . $elementHTML . '</div>';
+        $text = preg_replace('/#IMAGE_BLOCK' . $key + 1 . '#/', $html, $text);
     }
 
-    foreach ($arImageBlocks as $key => $element){
-        $html = '<div class="row mb-5">'.$element.'</div>';
-        $text =  preg_replace('/#IMAGE_BLOCK' . $key+1 . '#/', $html, $text);
-    }
-return $text;
+    return $text;
+}
+
+function getlistElement($key, $image): string
+{
+    $path = CFile::GetPath($image);
+    $md = $key == 0 ? 12 : 6;
+    return '<div class="col-md-' . $md . ' mb-4 element-animate">
+                <img src="' . $path . '" alt="Image placeholder" class="img-fluid">
+            </div>';
 }

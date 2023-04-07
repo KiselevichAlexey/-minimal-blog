@@ -29,10 +29,14 @@ cd docker
 Вход в админку
 =================
 http://localhost/bitrix
+
+Детальная страница заполнена только одна
+http://localhost/categories/lifestyle/kak-sozdat-uyutnyy-dom-sovety-i-rekomendatsii/
 ```
 Логин: admin
 Пароль: adminadmin
 ```
+
 
 
 MailTrap
